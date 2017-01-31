@@ -43,9 +43,9 @@ def csmapMake(iface, dem):
     result = processing.runalg("saga:slopeaspectcurvature", gaussian["RESULT"],  6, 0, 0, None, None, None, None, None, None,None, None, None, None, None, None)
 
     #gaussian_layer = processing.load(gaussian["RESULT"])
-    curvature_layer = processing.load(result["C_PLAN"])
+    curvature_layer = processing.load(result["C_GENE"])
     slope_layer = processing.load(dem_result["SLOPE"])
-    curvature_layer2 = processing.load(result["C_PLAN"])
+    curvature_layer2 = processing.load(result["C_GENE"])
     slope_layer2 = processing.load(dem_result["SLOPE"])
 
     setLayerStyle(iface, curvature_layer, "Blues", 9, True, -0.2, 0.2)
