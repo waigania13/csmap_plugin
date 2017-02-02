@@ -46,5 +46,5 @@ class Ui_CSMapDialogBase(object):
         QtCore.QMetaObject.connectSlotsByName(CSMapDialogBase)
 
     def retranslateUi(self, CSMapDialogBase):
-        CSMapDialogBase.setWindowTitle(_translate("CSMapDialogBase", "csmap", None))
+        CSMapDialogBase.setWindowTitle(_translate("CSMapDialogBase", "CSMapMaker", None))
         self.label.setText(_translate("CSMapDialogBase", "DEM Layer", None))

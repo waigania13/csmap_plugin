@@ -3,7 +3,7 @@
 /***************************************************************************
  CSMap
                                  A QGIS plugin
- csmap plugin
+ CSMapMaker plugin
                               -------------------
         begin                : 2017-01-31
         git sha              : $Format:%H$
@@ -65,7 +65,7 @@ class CSMap:
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&csmap')
+        self.menu = self.tr(u'&CSMapMaker')
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'CSMap')
         self.toolbar.setObjectName(u'CSMap')
@@ -165,7 +165,7 @@ class CSMap:
         icon_path = ':/plugins/CSMap/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'csmap'),
+            text=self.tr(u'CSMapMaker'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
@@ -174,7 +174,7 @@ class CSMap:
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginRasterMenu(
-                self.tr(u'&csmap'),
+                self.tr(u'&CSMapMaker'),
                 action)
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
