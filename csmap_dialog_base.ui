@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>383</width>
-    <height>85</height>
+    <width>382</width>
+    <height>116</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>csmap</string>
+   <string>CSMapMaker</string>
   </property>
   <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>50</y>
+     <y>80</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -32,14 +32,11 @@
   <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox">
    <property name="geometry">
     <rect>
-     <x>99</x>
+     <x>119</x>
      <y>10</y>
-     <width>271</width>
+     <width>251</width>
      <height>27</height>
     </rect>
-   </property>
-   <property name="filters">
-    <set>1</set>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -47,7 +44,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>81</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -55,12 +52,85 @@
     <string>DEM Layer</string>
    </property>
   </widget>
+  <widget class="QComboBox" name="curvature_box">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>50</y>
+     <width>251</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>General Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Profile Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Plan Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Tangential Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Longitudinal Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Cross-Sectional Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minimal Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Maximal Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Total Curvature</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Flow Line Curvature</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CurvatureMethod</string>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>QgsMapLayerComboBox</class>
    <extends>QComboBox</extends>
-   <header>qgis.gui</header>
+   <header>qgsmaplayercombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

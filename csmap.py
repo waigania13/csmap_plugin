@@ -195,6 +195,27 @@ class CSMap:
 
     def csmap(self): 
         layer = self.dlg.mMapLayerComboBox.currentLayer()
+        curvature_text = self.dlg.curvature_box.currentText()
         if layer is None:
             return
-        csmapMake(self.iface, layer)
+        if curvature_text == 'General Curvature':
+            curvature_method = 'C_GENE'
+        elif curvature_text == 'Profile Curvature':
+            curvature_method = 'C_PROF'
+        elif curvature_text == 'Plan Curvature':
+            curvature_method = 'C_PLAN'
+        elif curvature_text == 'Tangential Curvature':
+            curvature_method = 'C_TANG'
+        elif curvature_text == 'Longitudinal Curvature':
+            curvature_method = 'C_LONG'
+        elif curvature_text == 'Cross-Sectional Curvature':
+            curvature_method = 'C_CROS'
+        elif curvature_text == 'Minimal Curvature':
+            curvature_method = 'C_MINI'
+        elif curvature_text == 'Maximal Curvature':
+            curvature_method = 'C_MAXI'
+        elif curvature_text == 'Total Curvature':
+            curvature_method = 'C_TOTA'
+        elif curvature_text == 'Flow Line Curvature':
+            curvature_method = 'C_ROTO'
+        csmapMake(self.iface, layer, curvature_method)
