@@ -5,7 +5,7 @@ from qgis.utils import *
 from osgeo import gdal
 import processing
 
-def setLayerStyle(iface, layer, color_name, rank, reverse, min=None, max=None):
+def setLayerStyle(iface, layer, color_name, rank, reverse, opa=1.0, min=None, max=None):
     if min is None or max is None:
         data = gdal.Open(layer.dataProvider().dataSourceUri())
         band = data.GetRasterBand(1)
@@ -31,7 +31,7 @@ def setLayerStyle(iface, layer, color_name, rank, reverse, min=None, max=None):
     myPseudoRenderer = QgsSingleBandPseudoColorRenderer(layer.dataProvider(), layer.type(),  myRasterShader)
 
     layer.setRenderer(myPseudoRenderer)
-    layer.renderer().setOpacity(0.5)
+    layer.renderer().setOpacity(opa)
 
     layer.triggerRepaint()
     iface.legendInterface().refreshLayerSymbology(layer)
@@ -43,12 +43,24 @@ def csmapMake(iface, dem, curvature_method):
     result = processing.runalg("saga:slopeaspectcurvature", gaussian["RESULT"],  6, 0, 0, None, None, None, None, None, None,None, None, None, None, None, None)
 
     #gaussian_layer = processing.load(gaussian["RESULT"])
-    curvature_layer = processing.load(result[curvature_method])
+    curvature_layer = processing.load(result[curvature_method[0]])
     slope_layer = processing.load(dem_result["SLOPE"])
-    curvature_layer2 = processing.load(result[curvature_method])
+    curvature_layer2 = processing.load(result[curvature_method[7]])
     slope_layer2 = processing.load(dem_result["SLOPE"])
 
-    setLayerStyle(iface, curvature_layer, "Blues", 9, True, -0.2, 0.2)
-    setLayerStyle(iface, curvature_layer2, "RdBu", 9, True, -0.2, 0.2)
-    setLayerStyle(iface, slope_layer, "Oranges", 9, False)
-    setLayerStyle(iface, slope_layer2, "WhiteToBlack", 2, False)
+    setLayerStyle(iface, curvature_layer, 
+        curvature_method[1],
+        curvature_method[2],
+        curvature_method[3],
+        curvature_method[4],
+        curvature_method[5],
+        curvature_method[6])
+    setLayerStyle(iface, curvature_layer2, 
+        curvature_method[8],
+        curvature_method[9],
+        curvature_method[10],
+        curvature_method[11],
+        curvature_method[12],
+        curvature_method[13])
+    setLayerStyle(iface, slope_layer, "Oranges", 9, False, 0.5)
+    setLayerStyle(iface, slope_layer2, "WhiteToBlack", 2, False, 0.5)

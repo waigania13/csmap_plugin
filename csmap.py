@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QIcon, QMessageBox
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -195,27 +195,36 @@ class CSMap:
 
     def csmap(self): 
         layer = self.dlg.mMapLayerComboBox.currentLayer()
-        curvature_text = self.dlg.curvature_box.currentText()
+        mode = self.dlg.csmap_mode.checkedId()
+       
         if layer is None:
             return
-        if curvature_text == 'General Curvature':
-            curvature_method = 'C_GENE'
-        elif curvature_text == 'Profile Curvature':
-            curvature_method = 'C_PROF'
-        elif curvature_text == 'Plan Curvature':
-            curvature_method = 'C_PLAN'
-        elif curvature_text == 'Tangential Curvature':
-            curvature_method = 'C_TANG'
-        elif curvature_text == 'Longitudinal Curvature':
-            curvature_method = 'C_LONG'
-        elif curvature_text == 'Cross-Sectional Curvature':
-            curvature_method = 'C_CROS'
-        elif curvature_text == 'Minimal Curvature':
-            curvature_method = 'C_MINI'
-        elif curvature_text == 'Maximal Curvature':
-            curvature_method = 'C_MAXI'
-        elif curvature_text == 'Total Curvature':
-            curvature_method = 'C_TOTA'
-        elif curvature_text == 'Flow Line Curvature':
-            curvature_method = 'C_ROTO'
+
+        #Plan+General Mode
+        if mode == -3:
+            curvature_method = ['C_PLAN', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_GENE', 'RdBu', 5, True, 0.5, -0.326, 0.48]
+        # mode == -2 CS-MAP Mode
+        else:
+            curvature_text = self.dlg.curvature_box.currentText()
+            if curvature_text == 'General Curvature':
+                curvature_method = ['C_GENE', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_GENE', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Profile Curvature':
+                curvature_method = ['C_PROF', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_PROF', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Plan Curvature':
+                curvature_method = ['C_PLAN', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_PLAN', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Tangential Curvature':
+                curvature_method = ['C_TANG', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_TANG', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Longitudinal Curvature':
+                curvature_method = ['C_LONG', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_LONG', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Cross-Sectional Curvature':
+                curvature_method = ['C_CROS', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_CROS', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Minimal Curvature':
+                curvature_method = ['C_MINI', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_MINI', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Maximal Curvature':
+                curvature_method = ['C_MAXI', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_MAXI', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Total Curvature':
+                curvature_method = ['C_TOTA', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_TOTA', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+            elif curvature_text == 'Flow Line Curvature':
+                curvature_method = ['C_ROTO', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_ROTO', 'RdBu', 9, True, 0.5, -0.2, 0.2]
+
         csmapMake(self.iface, layer, curvature_method)
