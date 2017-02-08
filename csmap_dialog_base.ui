@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>183</height>
+    <width>411</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>150</y>
+     <x>50</x>
+     <y>290</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -32,8 +32,8 @@
   <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox">
    <property name="geometry">
     <rect>
-     <x>119</x>
-     <y>80</y>
+     <x>140</x>
+     <y>90</y>
      <width>251</width>
      <height>27</height>
     </rect>
@@ -42,8 +42,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>80</y>
+     <x>20</x>
+     <y>90</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -55,8 +55,8 @@
   <widget class="QComboBox" name="curvature_box">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>120</y>
+     <x>140</x>
+     <y>250</y>
      <width>251</width>
      <height>22</height>
     </rect>
@@ -115,21 +115,21 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>101</width>
+     <x>20</x>
+     <y>250</y>
+     <width>111</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>CurvatureMethod</string>
+    <string>Curvature Method</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="csmap_button">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
+     <x>30</x>
+     <y>40</y>
      <width>86</width>
      <height>16</height>
     </rect>
@@ -147,8 +147,8 @@
   <widget class="QRadioButton" name="csmpa_button2">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>30</y>
+     <x>130</x>
+     <y>40</y>
      <width>211</width>
      <height>16</height>
     </rect>
@@ -163,16 +163,80 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>361</width>
+     <x>20</x>
+     <y>10</y>
+     <width>371</width>
      <height>71</height>
     </rect>
    </property>
    <property name="title">
     <string>mode</string>
    </property>
-   <zorder>csmap_button</zorder>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gaussian Filter Parameters</string>
+   </property>
+  </widget>
+  <widget class="QgsSpinBox" name="param_standard">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>160</y>
+     <width>83</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>3</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>160</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Standard Deviation</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>200</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Radius</string>
+   </property>
+  </widget>
+  <widget class="QgsSpinBox" name="param_radius">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>200</y>
+     <width>83</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>12</number>
+   </property>
   </widget>
   <zorder>groupBox</zorder>
   <zorder>button_box</zorder>
@@ -182,11 +246,21 @@
   <zorder>label_2</zorder>
   <zorder>csmap_button</zorder>
   <zorder>csmpa_button2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>param_standard</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>param_radius</zorder>
  </widget>
  <customwidgets>
   <customwidget>
    <class>QgsMapLayerComboBox</class>
    <extends>QComboBox</extends>
+   <header>qgis.gui</header>
+  </customwidget>
+  <customwidget>
+   <class>QgsSpinBox</class>
+   <extends>QSpinBox</extends>
    <header>qgis.gui</header>
   </customwidget>
  </customwidgets>

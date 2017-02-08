@@ -36,13 +36,15 @@ def setLayerStyle(iface, layer, color_name, rank, reverse, opa=1.0, min=None, ma
     layer.triggerRepaint()
     iface.legendInterface().refreshLayerSymbology(layer)
 
-def csmapMake(iface, dem, curvature_method):
+def csmapMake(iface, dem, curvature_method, gaussian_params):
     dem_result = processing.runalg("saga:slopeaspectcurvature", dem,  6, 0, 0, None, None, None, None, None, None,None, None, None, None, None, None)
 
-    gaussian = processing.runalg("saga:gaussianfilter", dem, 3, 1, 12, None)
+    gaussian = processing.runalg("saga:gaussianfilter", dem, gaussian_params[0], 1, gaussian_params[1], None)
     result = processing.runalg("saga:slopeaspectcurvature", gaussian["RESULT"],  6, 0, 0, None, None, None, None, None, None,None, None, None, None, None, None)
 
-    #gaussian_layer = processing.load(gaussian["RESULT"])
+    gaussian_layer = processing.load(gaussian["RESULT"])
+    legend = iface.legendInterface()
+    legend.setLayerVisible(gaussian_layer, False)
     curvature_layer = processing.load(result[curvature_method[0]])
     slope_layer = processing.load(dem_result["SLOPE"])
     curvature_layer2 = processing.load(result[curvature_method[7]])

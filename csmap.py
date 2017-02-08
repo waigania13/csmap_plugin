@@ -196,6 +196,8 @@ class CSMap:
     def csmap(self): 
         layer = self.dlg.mMapLayerComboBox.currentLayer()
         mode = self.dlg.csmap_mode.checkedId()
+        param_standard = self.dlg.param_standard.value()
+        param_radius = self.dlg.param_radius.value()
        
         if layer is None:
             return
@@ -227,4 +229,4 @@ class CSMap:
             elif curvature_text == 'Flow Line Curvature':
                 curvature_method = ['C_ROTO', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_ROTO', 'RdBu', 9, True, 0.5, -0.2, 0.2]
 
-        csmapMake(self.iface, layer, curvature_method)
+        csmapMake(self.iface, layer, curvature_method, [param_standard, param_radius])
