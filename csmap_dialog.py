@@ -42,3 +42,25 @@ class CSMapDialog(QtGui.QDialog, Ui_CSMapDialogBase):
 
     def accept(self):
         pass
+
+    def input_folder_action(self):
+        dialog = QtGui.QFileDialog(self)
+        dialog.setFileMode(QtGui.QFileDialog.Directory)
+        dialog.setOption(QtGui.QFileDialog.ShowDirsOnly, True)
+
+        if dialog.exec_():
+            self.input_folder_edit.setText(dialog.selectedFiles()[0])
+            pal = self.input_folder_edit.palette()
+            pal.setColor(QtGui.QPalette.Base, QtGui.QColor("white"))
+            self.input_folder_edit.setPalette(pal)
+
+    def output_folder_action(self):
+        dialog = QtGui.QFileDialog(self)
+        dialog.setFileMode(QtGui.QFileDialog.Directory)
+        dialog.setOption(QtGui.QFileDialog.ShowDirsOnly, True)
+
+        if dialog.exec_():
+            self.output_folder_edit.setText(dialog.selectedFiles()[0])
+            pal = self.output_folder_edit.palette()
+            pal.setColor(QtGui.QPalette.Base, QtGui.QColor("white"))
+            self.output_folder_edit.setPalette(pal)

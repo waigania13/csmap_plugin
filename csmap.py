@@ -21,13 +21,13 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon, QMessageBox
+from PyQt4.QtGui import QAction, QIcon, QMessageBox, QPalette, QColor
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
 from csmap_dialog import CSMapDialog
-import os.path
-from csmap_make import *
+import os
+from csmap_make import CSMapMake
 
 
 class CSMap:
@@ -69,6 +69,11 @@ class CSMap:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'CSMap')
         self.toolbar.setObjectName(u'CSMap')
+ 
+        # set default mode
+        self.csmap_single_process = "SINGLE"
+        self.csmap_batch_process = "BATCHPROCESS"
+        self.csmap_process = self.csmap_single_process
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -162,11 +167,18 @@ class CSMap:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/CSMap/icon.png'
+        icon_path = ':/plugins/CSMap/images/csmap.png'
         self.add_action(
             icon_path,
             text=self.tr(u'CSMapMaker'),
             callback=self.run,
+            parent=self.iface.mainWindow())
+
+        icon_path = ':/plugins/CSMap/images/csmap-batch.png'
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Batch Processing'),
+            callback=self.run_batch,
             parent=self.iface.mainWindow())
 
 
@@ -183,6 +195,50 @@ class CSMap:
 
     def run(self):
         """Run method that performs all the real work"""
+        self.csmap_process = self.csmap_single_process
+
+        # hide not need item
+        self.dlg.input_folder_label.hide()
+        self.dlg.input_folder_edit.hide()
+        self.dlg.input_folder_select.hide()
+        self.dlg.output_folder_label.hide()
+        self.dlg.output_folder_edit.hide()
+        self.dlg.output_folder_select.hide()
+        self.dlg.load_flg.hide()
+
+        # show need item
+        self.dlg.demlayer_label.show()
+        self.dlg.demlayer_box.show()
+
+        # show the dialog
+        self.dlg.show()
+        # Run the dialog event loop
+        result = self.dlg.exec_()
+        # See if OK was pressed
+        if result:
+            # Do something useful here - delete the line containing pass and
+            # substitute with your code.
+            pass
+
+    def run_batch(self):
+        """Run method that performs all the real work"""
+        self.csmap_process = self.csmap_batch_process
+
+        # show need item
+        self.dlg.input_folder_label.show()
+        self.dlg.input_folder_edit.show()
+        self.dlg.input_folder_edit.setText("")
+        self.dlg.input_folder_select.show()
+        self.dlg.output_folder_label.show()
+        self.dlg.output_folder_edit.show()
+        self.dlg.output_folder_edit.setText("")
+        self.dlg.output_folder_select.show()
+        self.dlg.load_flg.show()
+
+        # hide not need item
+        self.dlg.demlayer_label.hide()
+        self.dlg.demlayer_box.hide()
+
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
@@ -194,39 +250,70 @@ class CSMap:
             pass
 
     def csmap(self): 
-        layer = self.dlg.mMapLayerComboBox.currentLayer()
         mode = self.dlg.csmap_mode.checkedId()
         param_standard = self.dlg.param_standard.value()
         param_radius = self.dlg.param_radius.value()
-       
-        if layer is None:
-            return
+        curvature_method = self.get_curvature_method(mode, self.dlg.curvature_box.currentText())
 
+        csmap_maker = CSMapMake(self.iface)
+
+        if self.csmap_process == self.csmap_batch_process:
+            input_dir = self.dlg.input_folder_edit.text()
+            if len(input_dir) == 0:
+                pal = self.dlg.input_folder_edit.palette()
+                pal.setColor(QPalette.Base, QColor("pink"))
+                self.dlg.input_folder_edit.setPalette(pal)
+                return
+            
+            output_dir = self.dlg.output_folder_edit.text()
+            if len(output_dir) == 0:
+                pal = self.dlg.output_folder_edit.palette()
+                pal.setColor(QPalette.Base, QColor("pink"))
+                self.dlg.output_folder_edit.setPalette(pal)
+                return
+
+            for f in os.listdir(input_dir):
+                r,e = os.path.splitext(f)
+                if e.lower() != ".tif" and e.lower() != ".tiff":
+                    continue
+
+                csmap_maker.csmapMake(input_dir+"/"+f, curvature_method, [param_standard, param_radius], True, output_dir)
+                csmap_maker.clearLayers()
+
+            if self.dlg.load_flg.isChecked():
+                csmap_maker.loadResultFiles()
+
+        elif self.csmap_process == self.csmap_single_process:
+            layer = self.dlg.demlayer_box.currentLayer()
+            if layer is None:
+                return
+
+            csmap_maker.csmapMake(layer, curvature_method, [param_standard, param_radius])
+
+    def get_curvature_method(self, mode, ctext):
         #Plan+General Mode
         if mode == -3:
             curvature_method = ['C_PLAN', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_GENE', 'RdBu', 5, True, 0.5, -0.326, 0.48]
         # mode == -2 CS-MAP Mode
         else:
-            curvature_text = self.dlg.curvature_box.currentText()
-            if curvature_text == 'General Curvature':
+            if ctext == 'General Curvature':
                 curvature_method = ['C_GENE', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_GENE', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Profile Curvature':
+            elif ctext == 'Profile Curvature':
                 curvature_method = ['C_PROF', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_PROF', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Plan Curvature':
+            elif ctext == 'Plan Curvature':
                 curvature_method = ['C_PLAN', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_PLAN', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Tangential Curvature':
+            elif ctext == 'Tangential Curvature':
                 curvature_method = ['C_TANG', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_TANG', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Longitudinal Curvature':
+            elif ctext == 'Longitudinal Curvature':
                 curvature_method = ['C_LONG', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_LONG', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Cross-Sectional Curvature':
+            elif ctext == 'Cross-Sectional Curvature':
                 curvature_method = ['C_CROS', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_CROS', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Minimal Curvature':
+            elif ctext == 'Minimal Curvature':
                 curvature_method = ['C_MINI', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_MINI', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Maximal Curvature':
+            elif ctext == 'Maximal Curvature':
                 curvature_method = ['C_MAXI', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_MAXI', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Total Curvature':
+            elif ctext == 'Total Curvature':
                 curvature_method = ['C_TOTA', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_TOTA', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-            elif curvature_text == 'Flow Line Curvature':
+            elif ctext == 'Flow Line Curvature':
                 curvature_method = ['C_ROTO', 'Blues', 9, True, 0.5, -0.2, 0.2, 'C_ROTO', 'RdBu', 9, True, 0.5, -0.2, 0.2]
-
-        csmapMake(self.iface, layer, curvature_method, [param_standard, param_radius])
+        return curvature_method

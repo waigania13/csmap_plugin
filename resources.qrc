@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/plugins/CSMap" >
-        <file>icon.png</file>
+        <file>images/csmap.png</file>
+        <file>images/csmap-batch.png</file>
     </qresource>
 </RCC>

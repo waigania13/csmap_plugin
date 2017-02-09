@@ -11,5 +11,5 @@ qtデザイナでqgis custom widgetを使った場合に、エラーになる問
 - csmap_dialog_base.uiのcustomwidget headerの部分をqgis.guiに書き換え　　
 - csmap_dialog_base.uiをpyuic4 -o csmap_dialog_base.py csmap_dialog_base.ui
  で変換　　
-- 変換後のcsmap_dialog_base.pyにself.mMapLayerComboBox.setFilters(QgsMapLayerProxyModel.RasterLayer)を追記　　
-- 変換後のcsmap_dialog_base.pyをfrom qgis.gui import QgsMapLayerComboBox, QgsMapLayerProxyModelに変更
+- 変換後のcsmap_dialog_base.pyにself.demlayer_box.setFilters(QgsMapLayerProxyModel.RasterLayer)を追記　　
+- 変換後のcsmap_dialog_base.pyをfrom qgis.gui import QgsMapLayerComboBox, QgsSpinBox, QgsMapLayerProxyModelに変更

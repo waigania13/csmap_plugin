@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>330</height>
+    <height>405</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>290</y>
+     <y>370</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QgsMapLayerComboBox" name="mMapLayerComboBox">
+  <widget class="QgsMapLayerComboBox" name="demlayer_box">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -39,7 +39,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="demlayer_label">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>250</y>
+     <y>260</y>
      <width>251</width>
      <height>22</height>
     </rect>
@@ -112,11 +112,11 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="curvature_label">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>250</y>
+     <y>260</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -177,7 +177,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>130</y>
+     <y>140</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -190,7 +190,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>160</y>
+     <y>170</y>
      <width>83</width>
      <height>27</height>
     </rect>
@@ -203,7 +203,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>160</y>
+     <y>170</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -216,7 +216,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>200</y>
+     <y>210</y>
      <width>41</width>
      <height>31</height>
     </rect>
@@ -229,7 +229,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>200</y>
+     <y>210</y>
      <width>83</width>
      <height>27</height>
     </rect>
@@ -238,12 +238,109 @@
     <number>12</number>
    </property>
   </widget>
+  <widget class="QCheckBox" name="load_flg">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>350</y>
+     <width>341</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open output file after running algorithm</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="output_folder_select">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>320</y>
+     <width>41</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="output_folder_edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>320</y>
+     <width>201</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="output_folder_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>320</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Output Folder</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="input_folder_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Input Folder</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="input_folder_select">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>90</y>
+     <width>41</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_folder_edit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>90</y>
+     <width>201</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+  </widget>
   <zorder>groupBox</zorder>
   <zorder>button_box</zorder>
-  <zorder>mMapLayerComboBox</zorder>
-  <zorder>label</zorder>
+  <zorder>demlayer_box</zorder>
+  <zorder>demlayer_label</zorder>
   <zorder>curvature_box</zorder>
-  <zorder>label_2</zorder>
+  <zorder>curvature_label</zorder>
   <zorder>csmap_button</zorder>
   <zorder>csmpa_button2</zorder>
   <zorder>label_3</zorder>
@@ -251,6 +348,13 @@
   <zorder>label_4</zorder>
   <zorder>label_5</zorder>
   <zorder>param_radius</zorder>
+  <zorder>load_flg</zorder>
+  <zorder>output_folder_select</zorder>
+  <zorder>output_folder_edit</zorder>
+  <zorder>output_folder_label</zorder>
+  <zorder>input_folder_label</zorder>
+  <zorder>input_folder_select</zorder>
+  <zorder>input_folder_edit</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -264,6 +368,20 @@
    <header>qgis.gui</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>csmap_button</tabstop>
+  <tabstop>csmpa_button2</tabstop>
+  <tabstop>input_folder_edit</tabstop>
+  <tabstop>input_folder_select</tabstop>
+  <tabstop>demlayer_box</tabstop>
+  <tabstop>param_standard</tabstop>
+  <tabstop>param_radius</tabstop>
+  <tabstop>curvature_box</tabstop>
+  <tabstop>output_folder_edit</tabstop>
+  <tabstop>output_folder_select</tabstop>
+  <tabstop>load_flg</tabstop>
+  <tabstop>button_box</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -273,8 +391,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>50</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -289,8 +407,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>50</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel">
      <x>20</x>
@@ -310,7 +428,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>245</x>
-     <y>110</y>
+     <y>260</y>
     </hint>
    </hints>
   </connection>
@@ -326,14 +444,14 @@
     </hint>
     <hint type="destinationlabel">
      <x>245</x>
-     <y>110</y>
+     <y>260</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>csmpa_button2</sender>
    <signal>pressed()</signal>
-   <receiver>label_2</receiver>
+   <receiver>curvature_label</receiver>
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -342,14 +460,14 @@
     </hint>
     <hint type="destinationlabel">
      <x>60</x>
-     <y>115</y>
+     <y>260</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>csmap_button</sender>
    <signal>pressed()</signal>
-   <receiver>label_2</receiver>
+   <receiver>curvature_label</receiver>
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -358,11 +476,47 @@
     </hint>
     <hint type="destinationlabel">
      <x>60</x>
-     <y>115</y>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>output_folder_select</sender>
+   <signal>pressed()</signal>
+   <receiver>CSMapDialogBase</receiver>
+   <slot>output_folder_action()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>392</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>input_folder_select</sender>
+   <signal>pressed()</signal>
+   <receiver>CSMapDialogBase</receiver>
+   <slot>input_folder_action()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>370</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>371</x>
+     <y>137</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>output_folder_action()</slot>
+  <slot>input_folder_action()</slot>
+ </slots>
  <buttongroups>
   <buttongroup name="csmap_mode"/>
  </buttongroups>
