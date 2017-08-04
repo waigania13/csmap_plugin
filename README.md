@@ -1,7 +1,16 @@
 # CSMapMaker plugin 
+
 CS topographic map which is made from elevation, curvature and slope. CS topographic map represents valleys by blueish color and ridges by reddish color.
 
 ![result](images/result_csmap.png)
+
+# Using The Plugin
+
+* Load terrain raster layer.
+* Run the CSMapMaker from icon. ![icon](images/csmap.png)
+* Select DEM Layer and curveture method from menu.
+* Adjust Gaussian Filter Parameters (if you need).
+* Click [OK].
 
 # License
 Python modules of Qgis2threejs are released under the GNU Public License (GPL) Version 2.
