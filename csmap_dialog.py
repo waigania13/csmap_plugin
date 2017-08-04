@@ -7,8 +7,8 @@
                              -------------------
         begin                : 2017-01-31
         git sha              : $Format:%H$
-        copyright            : (C) 2017 by MIERUNE,LCC.
-        email                : info@mierune.co.jp
+        copyright            : (C) 2017 by MIERUNE Inc.
+        email                : waigania13@gmail.com
  ***************************************************************************/
 
 /***************************************************************************

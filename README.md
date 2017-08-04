@@ -1,3 +1,13 @@
+# CSMapMaker plugin 
+CS topographic map which is made from elevation, curvature and slope. CS topographic map represents valleys by blueish color and ridges by reddish color.
+
+![result](images/result_csmap.png)
+
+# License
+Python modules of Qgis2threejs are released under the GNU Public License (GPL) Version 2.
+
+Copyright (c) 2017 Kosuke ASAHI
+
 # CS立体図作成 QGISプラグイン
 QGISで、長野県林業総合センター 戸田さまが開発したCS立体図を作成するためのプラグインです　　
 

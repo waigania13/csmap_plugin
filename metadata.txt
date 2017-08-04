@@ -11,8 +11,8 @@ name=CSMapMaker
 qgisMinimumVersion=2.0
 description=csmap plugin
 version=0.1
-author=MIERUNE,LLC.
-email=info@mierune.co.jp
+author=MIERUNE Inc.
+email=waigania13@gmail.com
 
 about=CSMap
 

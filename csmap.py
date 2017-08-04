@@ -7,8 +7,8 @@
                               -------------------
         begin                : 2017-01-31
         git sha              : $Format:%H$
-        copyright            : (C) 2017 by MIERUNE,LCC.
-        email                : info@mierune.co.jp
+        copyright            : (C) 2017 by MIERUNE Inc.
+        email                : waigania13@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -277,7 +277,7 @@ class CSMap:
                 if e.lower() != ".tif" and e.lower() != ".tiff":
                     continue
 
-                csmap_maker.csmapMake(input_dir+"/"+f, curvature_method, [param_standard, param_radius], True, output_dir)
+                csmap_maker.csmapMake(input_dir+"/"+f, curvature_method, [param_standard, param_radius], True, output_dir, True)
                 csmap_maker.clearLayers()
 
             if self.dlg.load_flg.isChecked():

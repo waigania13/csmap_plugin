@@ -22,7 +22,7 @@ class CSMapMake:
         for r in self.result_files:
             processing.load(r)
         
-    def csmapMake(self, dem, curvature_method, gaussian_params, to_file=False, outdir=None):
+    def csmapMake(self, dem, curvature_method, gaussian_params, to_file=False, outdir=None, batch_mode=False):
         if type(dem) == str or type(dem) == unicode:
             dem_layer = processing.load(dem)
             self.temp_layers.append(dem_layer)
@@ -66,8 +66,12 @@ class CSMapMake:
             curvature_method[11],
             curvature_method[12],
             curvature_method[13])
-        self._setLayerStyle(slope_layer, "Oranges", 9, False, 0.5)
-        self._setLayerStyle(slope_layer2, "WhiteToBlack", 2, False, 0.5)
+        if batch_mode:
+            self._setLayerStyle(slope_layer, "Oranges", 9, False, 0.5, 0.0, 1.58)
+            self._setLayerStyle(slope_layer2, "WhiteToBlack", 2, False, 0.5, 0.0, 1.58)
+        else:
+            self._setLayerStyle(slope_layer, "Oranges", 9, False, 0.5)
+            self._setLayerStyle(slope_layer2, "WhiteToBlack", 2, False, 0.5)
 
         if to_file and outdir is not None:
             self._csmapToFile(dem_layer, [slope_layer2.id(), curvature_layer2.id(), slope_layer.id(), curvature_layer.id(), dem_layer.id()], outdir)
